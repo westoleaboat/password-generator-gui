@@ -4,7 +4,8 @@
 ### Overview
 This is a GUI application designed to generate strong, unique passwords for users. The application provides a simple and intuitive way to create secure passwords that meet various complexity requirements.
 
-![passwd_gen](passwd_gen.png)
+![passwd](https://github.com/user-attachments/assets/457bccce-bd3c-4911-b4c2-366542613444)
+
 
 
 ### Features
