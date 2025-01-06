@@ -30,11 +30,22 @@ class Application(tk.Tk):  # subclase from Tk instead of Frame
         super().__init__(*args, **kwargs)
 
         self.model = m.myModel()
+        self.passphrasemodel = m.myPassPhrase()
+        self.passwdmodel = m.myPasswordModel()
+
+        self.notebook = ttk.Notebook(self)
+        self.notebook.enable_traversal()
+        self.notebook.grid(row=1, sticky=tk.W + tk.E)
+
+        # Add form with widgets
         self.myform = v.MyForm(self, self.model)
+        self.passpgraseForm = v.MyPassPhrase(self, self.passphrasemodel)
+        self.passwdForm = v.MyPassword(self, self.passwdmodel)
 
         # window title
         self.title('Password Generator')
-        self.geometry('350x320')
+        # self.geometry('350x420')
+        self.resizable(False, False)    
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 
@@ -45,20 +56,22 @@ class Application(tk.Tk):  # subclase from Tk instead of Frame
         # ).grid(row=0
         )
 
-        # Add form with widgets
-        self.myform = v.MyForm(self, self.model)
-
         # place form
-        self.myform.grid(row=1, padx=10, sticky=tk.W + tk.E)
+        self.passwdForm.grid(row=0, sticky=tk.W + tk.E + tk.S + tk.N, pady=20)
+        # self.myform.grid(row=1, padx=10, sticky=tk.W + tk.E)
         self.myform.bind('<<GeneratePassword>>', self._on_generate)
-        self.myform.bind('<<CopyPassword>>', self._on_copy)
+        self.passwdForm.bind('<<GeneratePassword>>', self._on_generate)
+        self.passwdForm.bind('<<CopyPassword>>', self._on_copy)
 
+        self.notebook.add(self.myform, text='Password')
+        self.notebook.add(self.passpgraseForm, text='Passphrase')
+        self._on_generate()
 
-        self._on_generate() # trigger password generation when app starts
-
+        # print(self.myform.get())
     def _on_copy(self, *_):
         """Copy password to clipboard"""
-        string = self.myform._vars['Password'].get()
+        string = self.passwdForm._vars['Password'].get()
+        # print(string)
         self.clipboard_clear()
         self.clipboard_append(string)
         self.update()
@@ -75,20 +88,23 @@ class Application(tk.Tk):  # subclase from Tk instead of Frame
 
         # retrieve input
         data = self.myform.get()
+        print(data)
+
         # get generated password from models.py
         output = self.model.generate(data)
         # activate output
-        self.myform._disable_var.set(False)
+        self.passwdForm._disable_var.set(False)
 
         # set the password to the text widget
-        self.myform._vars['Password'].set(output)
+        self.passwdForm._vars['Password'].set(output)
 
         # disable output
-        self.myform._disable_var.set(True)
+        self.passwdForm._disable_var.set(True)
         # self.myform.set_output_state(tk.DISABLED)
-
+    
 
 if __name__ == "__main__":
     # create instance of our application and start its mainloop
     app = Application()
+    # app._on_generate(self)
     app.mainloop()

@@ -7,10 +7,18 @@ from . import views as v
 
 import argparse, secrets, random, string
 
-class myModel():
+class myPassPhrase():
+    fields = {
+        "Passphrase": {'req': True, 'type': FT.string}
+    }
+class myPasswordModel():
     fields = {
         "Password": {'req': True, 'type': FT.string},
-        "Total_lenght": {'req': True, 'type': FT.integer, 'min':8, 'max':30, 'value': 8},
+    }
+class myModel():
+    fields = {
+        # "Password": {'req': True, 'type': FT.string},
+        "Total_lenght": {'req': True, 'type': FT.integer, 'min':8, 'max':30},#, "step":1},#, "tickinterval":10},#, "step":1},#, 'value': 8, "increment":1},
         "Special_characters":{'req':True, 'type': FT.boolean},
         "Include_numbers":{'req':True, 'type': FT.boolean},
         "Use_capital_letters":{'req':True, 'type': FT.boolean},
@@ -60,4 +68,3 @@ class myModel():
 
         return password
     
-

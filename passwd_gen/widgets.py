@@ -11,6 +11,8 @@ from .constants import FieldTypes as FT
 
 import string
 
+import customtkinter
+
 ##################
 # Widget Classes #
 ##################
@@ -123,7 +125,8 @@ class DateEntry(ValidatedMixin, ttk.Entry):
     return valid
 
 
-class RequiredEntry(ValidatedMixin, ttk.Entry):
+# class RequiredEntry(ValidatedMixin, ttk.Entry):
+class RequiredEntry(ValidatedMixin, customtkinter.CTkEntry):
 
   def _focusout_validate(self, event):
     valid = True
@@ -414,6 +417,7 @@ class LabelInput(ttk.Frame):
     FT.long_string: BoundText,
     FT.decimal: ValidatedSpinbox,
     FT.integer: ValidatedSpinbox,
+    FT.integer2: ttk.Scale,
     FT.boolean: ttk.Checkbutton
   }
 
@@ -457,7 +461,7 @@ class LabelInput(ttk.Frame):
 
     # setup the variable
     if input_class in (
-        ttk.Checkbutton, ttk.Button, ttk.Radiobutton, ValidatedRadioGroup
+        ttk.Checkbutton, ttk.Button, ttk.Radiobutton, ValidatedRadioGroup, ttk.Scale, customtkinter.CTkSlider
     ):
       input_args["variable"] = self.variable
     else:
@@ -475,8 +479,10 @@ class LabelInput(ttk.Frame):
     else:
       self.input = input_class(self, **input_args)
     # with self.input created, add to layout
-    self.input.grid(row=1, column=0, sticky=(tk.W + tk.E))
-    self.columnconfigure(0, weight=1)
+    # self.input.grid(row=1, column=0, sticky=(tk.W + tk.E))
+    # self.columnconfigure(0, weight=1)
+    self.input.grid(row=0, column=1, sticky=(tk.W + tk.E), padx=(10,0))
+    self.columnconfigure(1, weight=1)
 
     # Set up error handling & display
     self.error = getattr(self.input, 'error', tk.StringVar())

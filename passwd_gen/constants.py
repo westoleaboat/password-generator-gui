@@ -16,4 +16,5 @@ class FieldTypes(Enum):
     long_string = auto()
     decimal = auto()
     integer = auto()
+    integer2 = auto()
     boolean = auto()
