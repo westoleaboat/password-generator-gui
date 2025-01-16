@@ -88,7 +88,7 @@ class Application(tk.Tk):  # subclase from Tk instead of Frame
 
         # retrieve input
         data = self.myform.get()
-        print(data)
+        # print(data)
 
         # get generated password from models.py
         output = self.model.generate(data)
@@ -106,5 +106,4 @@ class Application(tk.Tk):  # subclase from Tk instead of Frame
 if __name__ == "__main__":
     # create instance of our application and start its mainloop
     app = Application()
-    # app._on_generate(self)
     app.mainloop()

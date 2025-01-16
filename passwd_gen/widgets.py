@@ -173,8 +173,8 @@ class ValidatedSpinbox(ValidatedMixin, ttk.Spinbox):
   """A Spinbox that only accepts Numbers"""
 
   def __init__(self, *args, min_var=None, max_var=None,
-    focus_update_var=None, from_='-Infinity', to='Infinity', **kwargs
-   ):
+      focus_update_var=None, from_='-Infinity', to='Infinity', **kwargs
+  ):
     super().__init__(*args, from_=from_, to=to, **kwargs)
     increment = Decimal(str(kwargs.get('increment', '1.0')))
     self.precision = increment.normalize().as_tuple().exponent
@@ -461,7 +461,7 @@ class LabelInput(ttk.Frame):
 
     # setup the variable
     if input_class in (
-        ttk.Checkbutton, ttk.Button, ttk.Radiobutton, ValidatedRadioGroup, ttk.Scale, customtkinter.CTkSlider
+        ttk.Checkbutton, ttk.Button, ttk.Radiobutton, ValidatedRadioGroup, ttk.Scale, customtkinter.CTkSlider, tk.Scale
     ):
       input_args["variable"] = self.variable
     else:

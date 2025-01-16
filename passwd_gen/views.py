@@ -243,24 +243,7 @@ class MyForm(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 
-
-        # passwd_frame = self._add_frame('Password')
-
-        # w.LabelInput(
-        #     self,
-        #     label=None,
-        #     field_spec=fields['Password'],
-        #     var=self._vars['Password'],
-        #     input_class=w.BoundText,
-        #     disable_var=self._disable_var,
-        #     input_args={'height': 1, 'width': 25,}    
-        # ).grid(sticky=tk.W + tk.E,padx=10, row=0, column=0)
-
-
         options_frame = self._add_frame('Options')
-
-        # min_lenght = tk.IntVar(value=8)
-        # max_lenght = tk.IntVar(value=30)
 
         w.LabelInput(
             self,
@@ -270,15 +253,16 @@ class MyForm(tk.Frame):
             input_args={'from_': 8, 'to': 30, "width": 2}
         ).grid(sticky=tk.W + tk.E, row=0, column=1, padx=(0,10), pady=(10,0))
 
-        self._vars['Total_lenght'].set(8)
+        self._vars['Total_lenght'].set(12)
 
         w.LabelInput(
             self,
             "Lenght",
             var=self._vars['Total_lenght'],
-            input_class=customtkinter.CTkSlider,
-            input_args={},
-            field_spec=fields['Total_lenght'],
+            # input_class=customtkinter.CTkSlider,
+            input_class=tk.Scale,
+            input_args={'from_': 8, 'to': 30, 'orient':'horizontal', 'tickinterval':2},
+            # field_spec=fields['Total_lenght'],
         ).grid( row=0, column=0, pady=(10,0), padx=(10,0))#, padx=10, pady=(10,0))
 
         options_frame = self._add_frame('Character Types')
@@ -318,24 +302,6 @@ class MyForm(tk.Frame):
         buttons = ttk.Frame(self)  # add on a frame
         buttons.grid(sticky=tk.W + tk.E, row=4)
         # pass instance methods as callback commands
-        # self.generatebutton = ttk.Button(
-        #     options_frame, text="Generate", command=self._on_generate)
-        # self.generatebutton.grid(row=4, column=1, padx=10, pady=(0,20))
-
-        # self.copybutton = ttk.Button(
-        #     self, text="Copy", command=self._on_copy)
-        # self.copybutton.grid(row=0, column=1)
-
-        # self.transbutton = ttk.Button(
-        #     buttons, text="Binary to Text", command=self._on_trans, state='disabled')
-        # self.transbutton.pack(side=tk.RIGHT)
-
-        # self.savebutton = ttk.Button(
-        #     buttons, text="Save", command=self.master._on_save)  # on parent
-        # self.savebutton.pack(side=tk.RIGHT)
-        # self.resetbutton = ttk.Button(
-        #     buttons, text="Reset", command=self.reset)  # on this class
-        # # self.resetbutton.pack(side=tk.RIGHT)
 
     def reset(self):
         """Reset entries. Set all variables to empty string"""

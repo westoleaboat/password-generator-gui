@@ -18,7 +18,7 @@ class myPasswordModel():
 class myModel():
     fields = {
         # "Password": {'req': True, 'type': FT.string},
-        "Total_lenght": {'req': True, 'type': FT.integer, 'min':8, 'max':30},#, "step":1},#, "tickinterval":10},#, "step":1},#, 'value': 8, "increment":1},
+        "Total_lenght": {'req': True, 'type': FT.integer, 'min':8, 'max':30},
         "Special_characters":{'req':True, 'type': FT.boolean},
         "Include_numbers":{'req':True, 'type': FT.boolean},
         "Use_capital_letters":{'req':True, 'type': FT.boolean},
